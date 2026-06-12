@@ -2,3 +2,4 @@ target
 *.pdf
 .DS_Store
 *.txt
+*.out
