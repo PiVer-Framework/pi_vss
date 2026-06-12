@@ -14,7 +14,7 @@ use common::{
 };
 use criterion::{BatchSize, Criterion, criterion_group, criterion_main};
 use curve25519_dalek::{RistrettoPoint, Scalar};
-use rand::RngCore;
+use rand::Rng;
 use rayon::prelude::*;
 use zeroize::Zeroize;
 
@@ -318,47 +318,49 @@ fn gen_shares(c: &mut Criterion) {
 }
 
 fn gen_shares_batch(c: &mut Criterion) {
-    for (n, t) in BENCH_N_T {
+    // for (n, t) in BENCH_N_T {
+    for (n, t) in [(1024, 511), (2048, 1023)] {
         let mut rng = rand::rng();
 
         let x_pows = gen_powers(n, t);
-        for k in BENCH_K {
+        // for k in BENCH_K {
+        for k in [500, 1000] {
             let secrets = random_scalars(&mut rng, k);
-            let shares = generate_shares_batched(n, t, &x_pows, &secrets);
 
             c.bench_function(
                 &format!(
-                    "(n: {}, t: {}, k: {}) | Common | Generate Shares Batch",
-                    n, t, k
+                    "(k: {}, n: {}, t: {}) | Common | Generate Shares Batch",
+                    k, n, t
                 ),
                 |b| b.iter_with_large_drop(|| generate_shares_batched(n, t, &x_pows, &secrets)),
             );
 
-            let qualified_set = select_qualified_set(
-                &mut rng,
-                t,
-                &Some(shares.1),
-                &(0..n).collect::<Vec<usize>>(),
-            )
-            .unwrap();
+            // let shares = generate_shares_batched(n, t, &x_pows, &secrets);
+            // let qualified_set = select_qualified_set(
+            //     &mut rng,
+            //     t,
+            //     &Some(shares.1),
+            //     &(0..n).collect::<Vec<usize>>(),
+            // )
+            // .unwrap();
 
-            let indices: Vec<usize> = qualified_set.iter().map(|(index, _)| *index).collect();
+            // let indices: Vec<usize> = qualified_set.iter().map(|(index, _)| *index).collect();
 
-            let lagrange_bases = compute_lagrange_bases(&indices);
+            // let lagrange_bases = compute_lagrange_bases(&indices);
 
-            let q = Some(qualified_set);
+            // let q = Some(qualified_set);
 
-            c.bench_function(
-                &format!(
-                    "(n: {}, t: {}, k: {}) | Common | Reconstruct Secrets",
-                    n, t, k
-                ),
-                |b| {
-                    b.iter_with_large_drop(|| {
-                        assert_eq!(secrets, reconstruct_secrets(&q, &lagrange_bases).unwrap())
-                    })
-                },
-            );
+            // c.bench_function(
+            //     &format!(
+            //         "(k: {}, n: {}, t: {}) | Common | Reconstruct Secrets",
+            //         k, n, t
+            //     ),
+            //     |b| {
+            //         b.iter_with_large_drop(|| {
+            //             assert_eq!(secrets, reconstruct_secrets(&q, &lagrange_bases).unwrap())
+            //         })
+            //     },
+            // );
         }
     }
 }
@@ -448,8 +450,8 @@ fn gen_encrypted_shares_batch(c: &mut Criterion) {
 
             c.bench_function(
                 &format!(
-                    "(n: {}, t: {}, k: {}) | Common | Generate Encrypted Shares Batch",
-                    n, t, k
+                    "(k: {}, n: {}, t: {}) | Common | Generate Encrypted Shares Batch",
+                    k, n, t
                 ),
                 |b| {
                     b.iter_with_large_drop(|| {
@@ -494,8 +496,8 @@ fn gen_encrypted_shares_batch(c: &mut Criterion) {
 
             c.bench_function(
                 &format!(
-                    "(n: {}, t: {}, k: {}) | Common | Reconstruct Secrets Exponent",
-                    n, t, k
+                    "(k: {} n: {}, t: {}) | Common | Reconstruct Secrets Exponent",
+                    k, n, t
                 ),
                 |b| {
                     b.iter_with_large_drop(|| {
@@ -513,14 +515,14 @@ fn gen_encrypted_shares_batch(c: &mut Criterion) {
 criterion_group!(
     benches,
     // lagrange_basis_bench,
-    // ristretto_point_bench,
+    ristretto_point_bench,
     // hasher_bench
     // eval_bench,
     // sample_bench
     // eval_bench_one
-    gen_shares,
-    gen_encrypted_shares,
-    gen_shares_batch,
-    gen_encrypted_shares_batch,
+    // gen_shares,
+    // gen_encrypted_shares,
+    // gen_shares_batch,
+    // gen_encrypted_shares_batch,
 );
 criterion_main!(benches);

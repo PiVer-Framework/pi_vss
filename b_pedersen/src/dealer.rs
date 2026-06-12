@@ -4,7 +4,7 @@ use common::{
     secret_sharing::generate_shares_batched,
     utils::batch_decompress_ristretto_points,
 };
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto, traits::Identity};
 
@@ -53,7 +53,7 @@ impl Dealer {
         secrets: &Vec<Scalar>,
     ) -> (Vec<Vec<Scalar>>, (Vec<Scalar>, Vec<CompressedRistretto>))
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let (f_polynomials, f_evals) =
             generate_shares_batched(self.public_keys.len(), self.t, x_pows, secrets);
@@ -77,18 +77,18 @@ impl Dealer {
         let r = Polynomial::sample(self.t, rng);
         let r_evals = r.evaluate_range_precomp(x_pows, 1, self.public_keys.len());
 
-        r.coef_ref()
-            .par_iter()
+        c_buf
+            .par_iter_mut()
+            .zip(r.coef_ref().par_iter())
             .enumerate()
-            .map(|(t, r_coef)| {
-                f_polynomials
+            .for_each(|(t, (c, r_coef))| {
+                *c = f_polynomials
                     .par_iter()
                     .zip(self.g.par_iter())
                     .map(|(fk, gk)| gk * fk.coef_at_unchecked(t))
                     .reduce(|| self.g0 * r_coef, |acc, prod| acc + prod)
                     .compress()
-            })
-            .collect_into_vec(c_buf);
+            });
 
         r_evals
     }

@@ -8,7 +8,7 @@ use blake3::Hasher;
 use common::utils::batch_decompress_ristretto_points;
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto};
 
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 use rayon::prelude::*;
 use zeroize::Zeroize;
 
@@ -42,7 +42,7 @@ impl Dealer {
         secret: &Scalar,
     ) -> (Vec<CompressedRistretto>, (Scalar, Polynomial))
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         self.secret = Some(*secret);
         let (f_polynomial, f_evals) = self.generate_encrypted_shares(rng, x_pows, secret);

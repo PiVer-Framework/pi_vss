@@ -2,13 +2,32 @@ use std::ops::Mul;
 
 use blake3::Hasher;
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto};
+use num_bigint::BigUint;
 use rayon::prelude::*;
 use zeroize::Zeroize;
 
-use crate::error::{
-    Error,
-    ErrorKind::{CountMismatch, PointDecompressionError},
+use crate::{
+    Q,
+    error::{
+        Error,
+        ErrorKind::{CountMismatch, PointDecompressionError},
+    },
 };
+
+pub fn mod_pow(i: usize, t: usize) -> Scalar {
+    let i_m = BigUint::from(i);
+    let t_m = BigUint::from(t);
+    let modulus = BigUint::from_bytes_le(&Q);
+
+    let bytes = i_m.modpow(&t_m, &modulus).to_bytes_le();
+    let mut tmp_bytes: [u8; 32] = [0u8; 32];
+
+    for i in 0..bytes.len() {
+        tmp_bytes[i] = bytes[i];
+    }
+
+    Scalar::from_bytes_mod_order(tmp_bytes)
+}
 
 pub fn pointwise_op_in_place(
     op: fn(Scalar, Scalar) -> Scalar,

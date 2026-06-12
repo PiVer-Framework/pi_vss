@@ -4,7 +4,7 @@ use common::{
     secret_sharing::generate_shares_batched,
     utils::{batch_decompress_ristretto_points, compute_d_powers_from_point_commitments},
 };
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 use rayon::prelude::*;
 
 use blake3::Hasher;
@@ -55,7 +55,7 @@ impl Dealer {
         secrets: &Vec<Scalar>,
     ) -> (Vec<Vec<Scalar>>, (Vec<CompressedRistretto>, Polynomial))
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let k = secrets.len();
         let (f_polynomials, f_evals) =

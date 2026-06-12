@@ -1,0 +1,1682 @@
+warning: unexpected `cfg` condition name: `has_error_description_deprecated`
+  --> common/src/error.rs:3:1
+   |
+ 3 | / error_chain! {
+ 4 | |     errors{
+ 5 | |         PointDecompressionError(t: String) {
+ 6 | |             description("Unable to Decompress Compressed ristretto Point")
+...  |
+31 | | }
+   | |_^
+   |
+   = help: expected names are: `docsrs`, `feature`, and `test` and 31 more
+   = note: using a cfg inside a macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `impl_error_chain_processed` crate for guidance on how handle this unexpected cfg
+   = help: the macro `impl_error_chain_processed` may come from an old version of the `error_chain` crate, try updating your dependency with `cargo update -p error_chain`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+   = note: this warning originates in the macro `impl_error_chain_processed` which comes from the expansion of the macro `error_chain` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: `common` (lib) generated 1 warning
+   Compiling common v0.1.0 (/Users/georgionicolas/Development/cosic/pi/common)
+warning: `common` (lib test) generated 1 warning (1 duplicate)
+warning: unused import: `random_points`
+ --> common/benches/bench.rs:7:14
+  |
+7 |     random::{random_points, random_scalar, random_scalars},
+  |              ^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> common/benches/bench.rs:62:14
+   |
+62 |             |mut f0_vals| {
+   |              ----^^^^^^^
+   |              |
+   |              help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `fk`
+   --> common/benches/bench.rs:462:18
+    |
+462 |             let (fk, encrypted_shares) =
+    |                  ^^ help: if this is intentional, prefix it with an underscore: `_fk`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `add_mul` is never used
+  --> common/benches/bench.rs:21:4
+   |
+21 | fn add_mul(c: &mut Criterion) {
+   |    ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `sample_bench` is never used
+  --> common/benches/bench.rs:28:4
+   |
+28 | fn sample_bench(c: &mut Criterion) {
+   |    ^^^^^^^^^^^^
+
+warning: function `eval_bench` is never used
+   --> common/benches/bench.rs:103:4
+    |
+103 | fn eval_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `eval_bench_one` is never used
+   --> common/benches/bench.rs:137:4
+    |
+137 | fn eval_bench_one(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^
+
+warning: function `lagrange_basis_bench` is never used
+   --> common/benches/bench.rs:201:4
+    |
+201 | fn lagrange_basis_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `ristretto_point_bench` is never used
+   --> common/benches/bench.rs:218:4
+    |
+218 | fn ristretto_point_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `hasher_bench` is never used
+   --> common/benches/bench.rs:244:4
+    |
+244 | fn hasher_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^
+
+warning: function `gen_shares` is never used
+   --> common/benches/bench.rs:282:4
+    |
+282 | fn gen_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `gen_encrypted_shares` is never used
+   --> common/benches/bench.rs:368:4
+    |
+368 | fn gen_encrypted_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: variable `G` should have a snake case name
+   --> common/benches/bench.rs:221:9
+    |
+221 |     let G: RistrettoPoint = RistrettoPoint::mul_base(&random_scalar(&mut rng));
+    |         ^ help: convert the identifier to snake case: `g`
+    |
+    = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: `common` (bench "bench") generated 13 warnings (run `cargo fix --bench "bench"` to apply 2 suggestions)
+    Finished `bench` profile [optimized] target(s) in 16.35s
+     Running unittests src/lib.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-b876026ba1f12565)
+
+running 7 tests
+test polynomial::test::test_thing ... ignored
+test polynomial::test::test_thing_big ... ignored
+test random::test::test_rand ... ignored
+test secret_sharing::test::gen_encrypted_shares ... ignored
+test secret_sharing::test::gen_encrypted_shares_batch ... ignored
+test secret_sharing::test::gen_shares ... ignored
+test secret_sharing::test::gen_shares_batch ... ignored
+
+test result: ok. 0 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-bdb824ea7fa609bf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running benches/bench.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/bench-2e8c832301e3e8d3)
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Shares Batch
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 90.7s, or reduce sample count to 10.
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Shares Batch: Collecting 100 samples in estimated 90.682 s (100 iterations)
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Shares Batch: Analyzing
+(k: 500, n: 512, t: 255) | Common | Generate Shares Batch
+                        time:   [931.73 ms 939.09 ms 947.13 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 500, n: 512, t: 255) | Common | Reconstruct Secrets
+Benchmarking (k: 500, n: 512, t: 255) | Common | Reconstruct Secrets: Warming up for 3.0000 s
+Benchmarking (k: 500, n: 512, t: 255) | Common | Reconstruct Secrets: Collecting 100 samples in estimated 5.3510 s (1500 iterations)
+Benchmarking (k: 500, n: 512, t: 255) | Common | Reconstruct Secrets: Analyzing
+(k: 500, n: 512, t: 255) | Common | Reconstruct Secrets
+                        time:   [3.0891 ms 3.1994 ms 3.3138 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+
+Benchmarking (k: 1000, n: 512, t: 255) | Common | Generate Shares Batch
+Benchmarking (k: 1000, n: 512, t: 255) | Common | Generate Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 183.9s, or reduce sample count to 10.
+Benchmarking (k: 1000, n: 512, t: 255) | Common | Generate Shares Batch: Collecting 100 samples in estimated 183.87 s (100 iterations)
+error: bench failed, to rerun pass `--bench bench`
+
+Caused by:
+  process didn't exit successfully: `/Users/georgionicolas/Development/cosic/pi/target/release/deps/bench-2e8c832301e3e8d3 --bench` (signal: 15, SIGTERM: termination signal)
+warning: unexpected `cfg` condition name: `has_error_description_deprecated`
+  --> common/src/error.rs:3:1
+   |
+ 3 | / error_chain! {
+ 4 | |     errors{
+ 5 | |         PointDecompressionError(t: String) {
+ 6 | |             description("Unable to Decompress Compressed ristretto Point")
+...  |
+31 | | }
+   | |_^
+   |
+   = help: expected names are: `docsrs`, `feature`, and `test` and 31 more
+   = note: using a cfg inside a macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `impl_error_chain_processed` crate for guidance on how handle this unexpected cfg
+   = help: the macro `impl_error_chain_processed` may come from an old version of the `error_chain` crate, try updating your dependency with `cargo update -p error_chain`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+   = note: this warning originates in the macro `impl_error_chain_processed` which comes from the expansion of the macro `error_chain` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: `common` (lib) generated 1 warning
+   Compiling common v0.1.0 (/Users/georgionicolas/Development/cosic/pi/common)
+warning: `common` (lib test) generated 1 warning (1 duplicate)
+warning: unused import: `random_points`
+ --> common/benches/bench.rs:7:14
+  |
+7 |     random::{random_points, random_scalar, random_scalars},
+  |              ^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> common/benches/bench.rs:62:14
+   |
+62 |             |mut f0_vals| {
+   |              ----^^^^^^^
+   |              |
+   |              help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `fk`
+   --> common/benches/bench.rs:462:18
+    |
+462 |             let (fk, encrypted_shares) =
+    |                  ^^ help: if this is intentional, prefix it with an underscore: `_fk`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `add_mul` is never used
+  --> common/benches/bench.rs:21:4
+   |
+21 | fn add_mul(c: &mut Criterion) {
+   |    ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `sample_bench` is never used
+  --> common/benches/bench.rs:28:4
+   |
+28 | fn sample_bench(c: &mut Criterion) {
+   |    ^^^^^^^^^^^^
+
+warning: function `eval_bench` is never used
+   --> common/benches/bench.rs:103:4
+    |
+103 | fn eval_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `eval_bench_one` is never used
+   --> common/benches/bench.rs:137:4
+    |
+137 | fn eval_bench_one(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^
+
+warning: function `lagrange_basis_bench` is never used
+   --> common/benches/bench.rs:201:4
+    |
+201 | fn lagrange_basis_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `ristretto_point_bench` is never used
+   --> common/benches/bench.rs:218:4
+    |
+218 | fn ristretto_point_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `hasher_bench` is never used
+   --> common/benches/bench.rs:244:4
+    |
+244 | fn hasher_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^
+
+warning: function `gen_shares` is never used
+   --> common/benches/bench.rs:282:4
+    |
+282 | fn gen_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `gen_encrypted_shares` is never used
+   --> common/benches/bench.rs:368:4
+    |
+368 | fn gen_encrypted_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: variable `G` should have a snake case name
+   --> common/benches/bench.rs:221:9
+    |
+221 |     let G: RistrettoPoint = RistrettoPoint::mul_base(&random_scalar(&mut rng));
+    |         ^ help: convert the identifier to snake case: `g`
+    |
+    = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: `common` (bench "bench") generated 13 warnings (run `cargo fix --bench "bench"` to apply 2 suggestions)
+    Finished `bench` profile [optimized] target(s) in 13.79s
+     Running unittests src/lib.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-b876026ba1f12565)
+
+running 7 tests
+test polynomial::test::test_thing ... ignored
+test polynomial::test::test_thing_big ... ignored
+test random::test::test_rand ... ignored
+test secret_sharing::test::gen_encrypted_shares ... ignored
+test secret_sharing::test::gen_encrypted_shares_batch ... ignored
+test secret_sharing::test::gen_shares ... ignored
+test secret_sharing::test::gen_shares_batch ... ignored
+
+test result: ok. 0 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-bdb824ea7fa609bf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running benches/bench.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/bench-2e8c832301e3e8d3)
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Shares Batch
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 208.7s, or reduce sample count to 10.
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Shares Batch: Collecting 100 samples in estimated 208.72 s (100 iterations)
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Shares Batch: Analyzing
+(k: 500, n: 1024, t: 511) | Common | Generate Shares Batch
+                        time:   [2.0817 s 2.0841 s 2.0870 s]
+Found 12 outliers among 100 measurements (12.00%)
+  8 (8.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Reconstruct Secrets
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Reconstruct Secrets: Warming up for 3.0000 s
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Reconstruct Secrets: Collecting 100 samples in estimated 5.2107 s (2100 iterations)
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Reconstruct Secrets: Analyzing
+(k: 500, n: 1024, t: 511) | Common | Reconstruct Secrets
+                        time:   [2.4404 ms 2.4451 ms 2.4498 ms]
+
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Shares Batch
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 416.6s, or reduce sample count to 10.
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Shares Batch: Collecting 100 samples in estimated 416.57 s (100 iterations)
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Shares Batch: Analyzing
+(k: 1000, n: 1024, t: 511) | Common | Generate Shares Batch
+                        time:   [4.1616 s 4.1664 s 4.1723 s]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high severe
+
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Reconstruct Secrets
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Reconstruct Secrets: Warming up for 3.0000 s
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Reconstruct Secrets: Collecting 100 samples in estimated 5.4948 s (1100 iterations)
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Reconstruct Secrets: Analyzing
+(k: 1000, n: 1024, t: 511) | Common | Reconstruct Secrets
+                        time:   [4.9029 ms 4.9151 ms 4.9279 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+
+error: bench failed, to rerun pass `--bench bench`
+
+Caused by:
+  process didn't exit successfully: `/Users/georgionicolas/Development/cosic/pi/target/release/deps/bench-2e8c832301e3e8d3 --bench` (signal: 15, SIGTERM: termination signal)
+   Compiling common v0.1.0 (/Users/georgionicolas/Development/cosic/pi/common)
+warning: unexpected `cfg` condition name: `has_error_description_deprecated`
+  --> common/src/error.rs:3:1
+   |
+ 3 | / error_chain! {
+ 4 | |     errors{
+ 5 | |         PointDecompressionError(t: String) {
+ 6 | |             description("Unable to Decompress Compressed ristretto Point")
+...  |
+31 | | }
+   | |_^
+   |
+   = help: expected names are: `docsrs`, `feature`, and `test` and 31 more
+   = note: using a cfg inside a macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `impl_error_chain_processed` crate for guidance on how handle this unexpected cfg
+   = help: the macro `impl_error_chain_processed` may come from an old version of the `error_chain` crate, try updating your dependency with `cargo update -p error_chain`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+   = note: this warning originates in the macro `impl_error_chain_processed` which comes from the expansion of the macro `error_chain` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: `common` (lib) generated 1 warning (1 duplicate)
+warning: unused imports: `random_points` and `reconstruct_secrets`
+  --> common/benches/bench.rs:7:14
+   |
+ 7 |     random::{random_points, random_scalar, random_scalars},
+   |              ^^^^^^^^^^^^^
+...
+11 |         reconstruct_secrets, reconstruct_secrets_exponent, select_qualified_set,
+   |         ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> common/benches/bench.rs:62:14
+   |
+62 |             |mut f0_vals| {
+   |              ----^^^^^^^
+   |              |
+   |              help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `fk`
+   --> common/benches/bench.rs:462:18
+    |
+462 |             let (fk, encrypted_shares) =
+    |                  ^^ help: if this is intentional, prefix it with an underscore: `_fk`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `add_mul` is never used
+  --> common/benches/bench.rs:21:4
+   |
+21 | fn add_mul(c: &mut Criterion) {
+   |    ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `sample_bench` is never used
+  --> common/benches/bench.rs:28:4
+   |
+28 | fn sample_bench(c: &mut Criterion) {
+   |    ^^^^^^^^^^^^
+
+warning: function `eval_bench` is never used
+   --> common/benches/bench.rs:103:4
+    |
+103 | fn eval_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `eval_bench_one` is never used
+   --> common/benches/bench.rs:137:4
+    |
+137 | fn eval_bench_one(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^
+
+warning: function `lagrange_basis_bench` is never used
+   --> common/benches/bench.rs:201:4
+    |
+201 | fn lagrange_basis_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `ristretto_point_bench` is never used
+   --> common/benches/bench.rs:218:4
+    |
+218 | fn ristretto_point_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `hasher_bench` is never used
+   --> common/benches/bench.rs:244:4
+    |
+244 | fn hasher_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^
+
+warning: function `gen_shares` is never used
+   --> common/benches/bench.rs:282:4
+    |
+282 | fn gen_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `gen_encrypted_shares` is never used
+   --> common/benches/bench.rs:368:4
+    |
+368 | fn gen_encrypted_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `gen_encrypted_shares_batch` is never used
+   --> common/benches/bench.rs:436:4
+    |
+436 | fn gen_encrypted_shares_batch(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: variable `G` should have a snake case name
+   --> common/benches/bench.rs:221:9
+    |
+221 |     let G: RistrettoPoint = RistrettoPoint::mul_base(&random_scalar(&mut rng));
+    |         ^ help: convert the identifier to snake case: `g`
+    |
+    = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: `common` (lib test) generated 1 warning
+warning: `common` (bench "bench") generated 14 warnings (run `cargo fix --bench "bench"` to apply 2 suggestions)
+    Finished `bench` profile [optimized] target(s) in 15.62s
+     Running unittests src/lib.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-b876026ba1f12565)
+
+running 7 tests
+test polynomial::test::test_thing ... ignored
+test polynomial::test::test_thing_big ... ignored
+test random::test::test_rand ... ignored
+test secret_sharing::test::gen_encrypted_shares ... ignored
+test secret_sharing::test::gen_encrypted_shares_batch ... ignored
+test secret_sharing::test::gen_shares ... ignored
+test secret_sharing::test::gen_shares_batch ... ignored
+
+test result: ok. 0 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-bdb824ea7fa609bf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running benches/bench.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/bench-2e8c832301e3e8d3)
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Shares Batch
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 208.1s, or reduce sample count to 10.
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Shares Batch: Collecting 100 samples in estimated 208.12 s (100 iterations)
+error: bench failed, to rerun pass `--bench bench`
+
+Caused by:
+  process didn't exit successfully: `/Users/georgionicolas/Development/cosic/pi/target/release/deps/bench-2e8c832301e3e8d3 --bench` (signal: 15, SIGTERM: termination signal)
+warning: unexpected `cfg` condition name: `has_error_description_deprecated`
+  --> common/src/error.rs:3:1
+   |
+ 3 | / error_chain! {
+ 4 | |     errors{
+ 5 | |         PointDecompressionError(t: String) {
+ 6 | |             description("Unable to Decompress Compressed ristretto Point")
+...  |
+31 | | }
+   | |_^
+   |
+   = help: expected names are: `docsrs`, `feature`, and `test` and 31 more
+   = note: using a cfg inside a macro will use the cfgs from the destination crate and not the ones from the defining crate
+   = help: try referring to `impl_error_chain_processed` crate for guidance on how handle this unexpected cfg
+   = help: the macro `impl_error_chain_processed` may come from an old version of the `error_chain` crate, try updating your dependency with `cargo update -p error_chain`
+   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html> for more information about checking conditional configuration
+   = note: `#[warn(unexpected_cfgs)]` on by default
+   = note: this warning originates in the macro `impl_error_chain_processed` which comes from the expansion of the macro `error_chain` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: `common` (lib) generated 1 warning
+   Compiling common v0.1.0 (/Users/georgionicolas/Development/cosic/pi/common)
+warning: `common` (lib test) generated 1 warning (1 duplicate)
+warning: unused imports: `random_points` and `reconstruct_secrets`
+  --> common/benches/bench.rs:7:14
+   |
+ 7 |     random::{random_points, random_scalar, random_scalars},
+   |              ^^^^^^^^^^^^^
+...
+11 |         reconstruct_secrets, reconstruct_secrets_exponent, select_qualified_set,
+   |         ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> common/benches/bench.rs:62:14
+   |
+62 |             |mut f0_vals| {
+   |              ----^^^^^^^
+   |              |
+   |              help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `fk`
+   --> common/benches/bench.rs:462:18
+    |
+462 |             let (fk, encrypted_shares) =
+    |                  ^^ help: if this is intentional, prefix it with an underscore: `_fk`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `add_mul` is never used
+  --> common/benches/bench.rs:21:4
+   |
+21 | fn add_mul(c: &mut Criterion) {
+   |    ^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `sample_bench` is never used
+  --> common/benches/bench.rs:28:4
+   |
+28 | fn sample_bench(c: &mut Criterion) {
+   |    ^^^^^^^^^^^^
+
+warning: function `eval_bench` is never used
+   --> common/benches/bench.rs:103:4
+    |
+103 | fn eval_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `eval_bench_one` is never used
+   --> common/benches/bench.rs:137:4
+    |
+137 | fn eval_bench_one(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^
+
+warning: function `lagrange_basis_bench` is never used
+   --> common/benches/bench.rs:201:4
+    |
+201 | fn lagrange_basis_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `ristretto_point_bench` is never used
+   --> common/benches/bench.rs:218:4
+    |
+218 | fn ristretto_point_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `hasher_bench` is never used
+   --> common/benches/bench.rs:244:4
+    |
+244 | fn hasher_bench(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^
+
+warning: function `gen_shares` is never used
+   --> common/benches/bench.rs:282:4
+    |
+282 | fn gen_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^
+
+warning: function `gen_shares_batch` is never used
+   --> common/benches/bench.rs:320:4
+    |
+320 | fn gen_shares_batch(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^
+
+warning: function `gen_encrypted_shares` is never used
+   --> common/benches/bench.rs:368:4
+    |
+368 | fn gen_encrypted_shares(c: &mut Criterion) {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: variable `G` should have a snake case name
+   --> common/benches/bench.rs:221:9
+    |
+221 |     let G: RistrettoPoint = RistrettoPoint::mul_base(&random_scalar(&mut rng));
+    |         ^ help: convert the identifier to snake case: `g`
+    |
+    = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: `common` (bench "bench") generated 14 warnings (run `cargo fix --bench "bench"` to apply 2 suggestions)
+    Finished `bench` profile [optimized] target(s) in 13.37s
+     Running unittests src/lib.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-b876026ba1f12565)
+
+running 7 tests
+test polynomial::test::test_thing ... ignored
+test polynomial::test::test_thing_big ... ignored
+test random::test::test_rand ... ignored
+test secret_sharing::test::gen_encrypted_shares ... ignored
+test secret_sharing::test::gen_encrypted_shares_batch ... ignored
+test secret_sharing::test::gen_shares ... ignored
+test secret_sharing::test::gen_shares_batch ... ignored
+
+test result: ok. 0 passed; 0 failed; 7 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/main.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/common-bdb824ea7fa609bf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running benches/bench.rs (/Users/georgionicolas/Development/cosic/pi/target/release/deps/bench-2e8c832301e3e8d3)
+Benchmarking (k: 1, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 1, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.3299 s (45k iterations)
+Benchmarking (k: 1, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+                        time:   [117.47 µs 119.28 µs 121.47 µs]
+Found 12 outliers among 100 measurements (12.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  4 (4.00%) high mild
+  6 (6.00%) high severe
+
+Benchmarking (k: 1 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.1030 s (81k iterations)
+Benchmarking (k: 1 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+                        time:   [63.090 µs 63.382 µs 63.739 µs]
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low severe
+  2 (2.00%) low mild
+  4 (4.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 10, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 10, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 10, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.6877 s (10k iterations)
+Benchmarking (k: 10, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 10, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+                        time:   [562.48 µs 565.42 µs 569.83 µs]
+Found 11 outliers among 100 measurements (11.00%)
+  2 (2.00%) low severe
+  5 (5.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 10 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 10 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 10 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.2205 s (25k iterations)
+Benchmarking (k: 10 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 10 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+                        time:   [248.06 µs 248.44 µs 248.81 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  3 (3.00%) low mild
+  2 (2.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 50, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 50, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 50, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.2217 s (2100 iterations)
+Benchmarking (k: 50, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 50, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+                        time:   [2.4621 ms 2.4688 ms 2.4755 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+
+Benchmarking (k: 50 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 50 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.6s, enable flat sampling, or reduce sample count to 60.
+Benchmarking (k: 50 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.5550 s (5050 iterations)
+Benchmarking (k: 50 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 50 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+                        time:   [1.0930 ms 1.0980 ms 1.1039 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  4 (4.00%) low mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 100, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 100, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 100, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.2817 s (1100 iterations)
+Benchmarking (k: 100, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 100, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+                        time:   [4.7258 ms 4.7579 ms 4.8129 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 100 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 100 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 100 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.1238 s (2300 iterations)
+Benchmarking (k: 100 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 100 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+                        time:   [2.1275 ms 2.1321 ms 2.1368 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  4 (4.00%) high mild
+
+Benchmarking (k: 250, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 250, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 250, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.9414 s (500 iterations)
+Benchmarking (k: 250, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 250, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+                        time:   [11.644 ms 11.747 ms 11.884 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 250 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 250 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 250 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.1976 s (1000 iterations)
+Benchmarking (k: 250 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 250 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+                        time:   [5.1007 ms 5.1138 ms 5.1275 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+
+Benchmarking (k: 500, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 500, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 500, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 6.9656 s (300 iterations)
+Benchmarking (k: 500, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 500, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+                        time:   [22.918 ms 23.092 ms 23.370 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  5 (5.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 500 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 500 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 500 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.0836 s (500 iterations)
+Benchmarking (k: 500 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 500 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+                        time:   [9.9984 ms 10.151 ms 10.361 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 1000, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1000, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 1000, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 9.0622 s (200 iterations)
+Benchmarking (k: 1000, n: 16, t: 7) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1000, n: 16, t: 7) | Common | Generate Encrypted Shares Batch
+                        time:   [45.121 ms 45.188 ms 45.256 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+
+Benchmarking (k: 1000 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1000 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1000 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.0210 s (300 iterations)
+Benchmarking (k: 1000 n: 16, t: 7) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1000 n: 16, t: 7) | Common | Reconstruct Secrets Exponent
+                        time:   [19.838 ms 20.032 ms 20.272 ms]
+Found 12 outliers among 100 measurements (12.00%)
+  1 (1.00%) low severe
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+  6 (6.00%) high severe
+
+Benchmarking (k: 1, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 1, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.6017 s (30k iterations)
+Benchmarking (k: 1, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+                        time:   [185.81 µs 186.35 µs 186.92 µs]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) low mild
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 1 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.0900 s (61k iterations)
+Benchmarking (k: 1 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+                        time:   [85.304 µs 85.554 µs 85.849 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  3 (3.00%) high mild
+  5 (5.00%) high severe
+
+Benchmarking (k: 10, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 10, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.3s, enable flat sampling, or reduce sample count to 60.
+Benchmarking (k: 10, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.2749 s (5050 iterations)
+Benchmarking (k: 10, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 10, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+                        time:   [1.0410 ms 1.0451 ms 1.0512 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  2 (2.00%) low mild
+  8 (8.00%) high severe
+
+Benchmarking (k: 10 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 10 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 10 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.6721 s (15k iterations)
+Benchmarking (k: 10 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 10 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+                        time:   [440.99 µs 441.90 µs 442.87 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  2 (2.00%) low severe
+  2 (2.00%) low mild
+  4 (4.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 50, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 50, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 50, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.3046 s (1100 iterations)
+Benchmarking (k: 50, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 50, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+                        time:   [4.7435 ms 4.7559 ms 4.7687 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+
+Benchmarking (k: 50 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 50 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 50 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.1541 s (2500 iterations)
+Benchmarking (k: 50 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 50 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+                        time:   [2.0588 ms 2.0736 ms 2.0940 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 100, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 100, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 100, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.6572 s (600 iterations)
+Benchmarking (k: 100, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 100, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+                        time:   [9.3470 ms 9.4712 ms 9.6386 ms]
+Found 10 outliers among 100 measurements (10.00%)
+  4 (4.00%) high mild
+  6 (6.00%) high severe
+
+Benchmarking (k: 100 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 100 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 100 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.3730 s (1300 iterations)
+Benchmarking (k: 100 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 100 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+                        time:   [4.0064 ms 4.0616 ms 4.1413 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  6 (6.00%) high severe
+
+Benchmarking (k: 250, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 250, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 250, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 6.9982 s (300 iterations)
+Benchmarking (k: 250, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 250, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+                        time:   [23.329 ms 23.425 ms 23.550 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 250 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 250 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 250 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.0718 s (500 iterations)
+Benchmarking (k: 250 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 250 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+                        time:   [9.9883 ms 10.013 ms 10.038 ms]
+
+Benchmarking (k: 500, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 500, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 500, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 9.5167 s (200 iterations)
+Benchmarking (k: 500, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 500, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+                        time:   [46.256 ms 46.325 ms 46.394 ms]
+
+Benchmarking (k: 500 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 500 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 500 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.0340 s (300 iterations)
+Benchmarking (k: 500 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 500 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+                        time:   [19.750 ms 19.795 ms 19.842 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+
+Benchmarking (k: 1000, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1000, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.3s, or reduce sample count to 50.
+Benchmarking (k: 1000, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 9.3140 s (100 iterations)
+Benchmarking (k: 1000, n: 32, t: 15) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1000, n: 32, t: 15) | Common | Generate Encrypted Shares Batch
+                        time:   [92.298 ms 92.603 ms 92.965 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  1 (1.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 1000 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1000 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1000 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.8970 s (200 iterations)
+Benchmarking (k: 1000 n: 32, t: 15) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1000 n: 32, t: 15) | Common | Reconstruct Secrets Exponent
+                        time:   [39.209 ms 39.315 ms 39.454 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 1, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 1, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.8537 s (20k iterations)
+Benchmarking (k: 1, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+                        time:   [287.43 µs 290.71 µs 293.81 µs]
+Found 10 outliers among 100 measurements (10.00%)
+  3 (3.00%) low severe
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 1 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.1145 s (40k iterations)
+Benchmarking (k: 1 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+                        time:   [126.98 µs 127.26 µs 127.57 µs]
+Found 8 outliers among 100 measurements (8.00%)
+  2 (2.00%) low mild
+  6 (6.00%) high severe
+
+Benchmarking (k: 10, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 10, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 10, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.1783 s (2500 iterations)
+Benchmarking (k: 10, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 10, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+                        time:   [2.0712 ms 2.1021 ms 2.1422 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  2 (2.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 10 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 10 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 10 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 8.5363 s (10k iterations)
+Benchmarking (k: 10 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 10 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+                        time:   [848.26 µs 850.19 µs 852.16 µs]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+
+Benchmarking (k: 50, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 50, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 50, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.8852 s (600 iterations)
+Benchmarking (k: 50, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 50, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+                        time:   [9.6407 ms 9.6632 ms 9.6870 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high mild
+
+Benchmarking (k: 50 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 50 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 50 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.2845 s (1300 iterations)
+Benchmarking (k: 50 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 50 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+                        time:   [3.9743 ms 3.9821 ms 3.9900 ms]
+
+Benchmarking (k: 100, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 100, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 100, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.7318 s (300 iterations)
+Benchmarking (k: 100, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 100, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+                        time:   [19.089 ms 19.257 ms 19.485 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 100 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 100 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 100 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.5635 s (700 iterations)
+Benchmarking (k: 100 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 100 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+                        time:   [8.2762 ms 8.3115 ms 8.3445 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low severe
+  4 (4.00%) low mild
+
+Benchmarking (k: 250, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 250, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.0s, or reduce sample count to 90.
+Benchmarking (k: 250, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.0040 s (100 iterations)
+Benchmarking (k: 250, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 250, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+                        time:   [48.989 ms 49.100 ms 49.219 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 250 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 250 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 250 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.9861 s (300 iterations)
+Benchmarking (k: 250 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 250 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+                        time:   [19.608 ms 19.720 ms 19.855 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 500, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 500, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.7s, or reduce sample count to 50.
+Benchmarking (k: 500, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 9.6531 s (100 iterations)
+Benchmarking (k: 500, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 500, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+                        time:   [95.766 ms 95.983 ms 96.273 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 500 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 500 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 500 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.8089 s (200 iterations)
+Benchmarking (k: 500 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 500 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+                        time:   [38.776 ms 38.816 ms 38.858 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+
+Benchmarking (k: 1000, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1000, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 19.2s, or reduce sample count to 20.
+Benchmarking (k: 1000, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 19.217 s (100 iterations)
+Benchmarking (k: 1000, n: 64, t: 31) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1000, n: 64, t: 31) | Common | Generate Encrypted Shares Batch
+                        time:   [191.48 ms 191.86 ms 192.31 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 1000 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1000 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.8s, or reduce sample count to 60.
+Benchmarking (k: 1000 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.7691 s (100 iterations)
+Benchmarking (k: 1000 n: 64, t: 31) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1000 n: 64, t: 31) | Common | Reconstruct Secrets Exponent
+                        time:   [77.321 ms 77.391 ms 77.465 ms]
+Found 7 outliers among 100 measurements (7.00%)
+  7 (7.00%) high mild
+
+Benchmarking (k: 1, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 1, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.1610 s (10k iterations)
+Benchmarking (k: 1, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+                        time:   [506.76 µs 507.84 µs 509.31 µs]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 1 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.4296 s (25k iterations)
+Benchmarking (k: 1 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+                        time:   [212.76 µs 213.31 µs 213.82 µs]
+Found 9 outliers among 100 measurements (9.00%)
+  4 (4.00%) low mild
+  5 (5.00%) high mild
+
+Benchmarking (k: 10, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 10, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 10, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.1773 s (1200 iterations)
+Benchmarking (k: 10, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 10, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+                        time:   [4.2999 ms 4.3098 ms 4.3198 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) low mild
+
+Benchmarking (k: 10 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 10 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 8.3s, enable flat sampling, or reduce sample count to 50.
+Benchmarking (k: 10 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 8.2687 s (5050 iterations)
+Benchmarking (k: 10 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 10 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+                        time:   [1.6799 ms 1.6841 ms 1.6877 ms]
+
+Benchmarking (k: 50, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 50, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 50, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 6.3483 s (300 iterations)
+Benchmarking (k: 50, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 50, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+                        time:   [21.070 ms 21.333 ms 21.711 ms]
+Found 17 outliers among 100 measurements (17.00%)
+  4 (4.00%) low severe
+  5 (5.00%) low mild
+  5 (5.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 50 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 50 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 50 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.6118 s (700 iterations)
+Benchmarking (k: 50 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 50 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+                        time:   [7.9020 ms 7.9218 ms 7.9426 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high mild
+
+Benchmarking (k: 100, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 100, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 100, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 8.4476 s (200 iterations)
+Benchmarking (k: 100, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 100, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+                        time:   [41.772 ms 41.834 ms 41.896 ms]
+
+Benchmarking (k: 100 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 100 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 100 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.4223 s (400 iterations)
+Benchmarking (k: 100 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 100 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+                        time:   [15.586 ms 15.623 ms 15.664 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 250, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 250, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 10.4s, or reduce sample count to 40.
+Benchmarking (k: 250, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 10.437 s (100 iterations)
+Benchmarking (k: 250, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 250, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+                        time:   [103.94 ms 104.19 ms 104.49 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 250 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 250 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 250 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.7874 s (200 iterations)
+Benchmarking (k: 250 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 250 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+                        time:   [38.589 ms 38.682 ms 38.813 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 500, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 500, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 20.8s, or reduce sample count to 20.
+Benchmarking (k: 500, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 20.761 s (100 iterations)
+Benchmarking (k: 500, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 500, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+                        time:   [206.90 ms 207.16 ms 207.45 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high severe
+
+Benchmarking (k: 500 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 500 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.7s, or reduce sample count to 60.
+Benchmarking (k: 500 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.7399 s (100 iterations)
+Benchmarking (k: 500 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 500 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+                        time:   [77.115 ms 77.298 ms 77.529 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  5 (5.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 1000, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1000, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 41.6s, or reduce sample count to 10.
+Benchmarking (k: 1000, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 41.588 s (100 iterations)
+Benchmarking (k: 1000, n: 128, t: 63) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1000, n: 128, t: 63) | Common | Generate Encrypted Shares Batch
+                        time:   [413.87 ms 414.36 ms 414.84 ms]
+
+Benchmarking (k: 1000 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1000 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 15.4s, or reduce sample count to 30.
+Benchmarking (k: 1000 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 15.450 s (100 iterations)
+Benchmarking (k: 1000 n: 128, t: 63) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1000 n: 128, t: 63) | Common | Reconstruct Secrets Exponent
+                        time:   [153.81 ms 153.94 ms 154.08 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 1, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.7s, enable flat sampling, or reduce sample count to 60.
+Benchmarking (k: 1, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.6801 s (5050 iterations)
+Benchmarking (k: 1, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+                        time:   [1.1078 ms 1.1299 ms 1.1588 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 1 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.7320 s (15k iterations)
+Benchmarking (k: 1 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+                        time:   [366.35 µs 367.15 µs 368.15 µs]
+Found 11 outliers among 100 measurements (11.00%)
+  4 (4.00%) low mild
+  7 (7.00%) high mild
+
+Benchmarking (k: 10, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 10, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 10, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.9379 s (600 iterations)
+Benchmarking (k: 10, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 10, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+                        time:   [9.7344 ms 9.7628 ms 9.7961 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 10 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 10 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 10 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.0948 s (1600 iterations)
+Benchmarking (k: 10 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 10 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+                        time:   [3.2663 ms 3.2745 ms 3.2835 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  3 (3.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 50, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 50, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 50, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 9.7100 s (200 iterations)
+Benchmarking (k: 50, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 50, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+                        time:   [48.219 ms 48.328 ms 48.462 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  4 (4.00%) low mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 50 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 50 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 50 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.2859 s (400 iterations)
+Benchmarking (k: 50 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 50 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+                        time:   [15.567 ms 15.597 ms 15.628 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high mild
+
+Benchmarking (k: 100, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 100, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.7s, or reduce sample count to 50.
+Benchmarking (k: 100, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 9.7244 s (100 iterations)
+Benchmarking (k: 100, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 100, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+                        time:   [95.953 ms 96.124 ms 96.315 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  4 (4.00%) low mild
+  4 (4.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 100 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 100 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 100 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.4746 s (200 iterations)
+Benchmarking (k: 100 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 100 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+                        time:   [31.394 ms 31.865 ms 32.395 ms]
+Found 17 outliers among 100 measurements (17.00%)
+  17 (17.00%) high severe
+
+Benchmarking (k: 250, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 250, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 23.7s, or reduce sample count to 20.
+Benchmarking (k: 250, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 23.707 s (100 iterations)
+Benchmarking (k: 250, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 250, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+                        time:   [238.59 ms 238.86 ms 239.14 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+
+Benchmarking (k: 250 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 250 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.7s, or reduce sample count to 60.
+Benchmarking (k: 250 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.7118 s (100 iterations)
+Benchmarking (k: 250 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 250 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+                        time:   [76.753 ms 76.824 ms 76.899 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  11 (11.00%) high mild
+
+Benchmarking (k: 500, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 500, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 48.1s, or reduce sample count to 10.
+Benchmarking (k: 500, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 48.060 s (100 iterations)
+Benchmarking (k: 500, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 500, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+                        time:   [479.15 ms 479.75 ms 480.36 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) low mild
+  4 (4.00%) high mild
+
+Benchmarking (k: 500 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 500 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 15.4s, or reduce sample count to 30.
+Benchmarking (k: 500 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 15.443 s (100 iterations)
+Benchmarking (k: 500 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 500 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+                        time:   [153.34 ms 153.56 ms 153.84 ms]
+Found 5 outliers among 100 measurements (5.00%)
+  1 (1.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 1000, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1000, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 95.9s, or reduce sample count to 10.
+Benchmarking (k: 1000, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 95.854 s (100 iterations)
+Benchmarking (k: 1000, n: 256, t: 127) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1000, n: 256, t: 127) | Common | Generate Encrypted Shares Batch
+                        time:   [952.47 ms 953.16 ms 953.87 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+
+Benchmarking (k: 1000 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1000 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 30.7s, or reduce sample count to 10.
+Benchmarking (k: 1000 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 30.733 s (100 iterations)
+Benchmarking (k: 1000 n: 256, t: 127) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1000 n: 256, t: 127) | Common | Reconstruct Secrets Exponent
+                        time:   [306.67 ms 306.89 ms 307.13 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high severe
+
+Benchmarking (k: 1, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 1, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.1960 s (1900 iterations)
+Benchmarking (k: 1, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+                        time:   [2.6897 ms 2.7583 ms 2.8806 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high severe
+
+Benchmarking (k: 1 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 1 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 7.0508 s (10k iterations)
+Benchmarking (k: 1 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+                        time:   [695.97 µs 698.79 µs 702.41 µs]
+Found 10 outliers among 100 measurements (10.00%)
+  2 (2.00%) low mild
+  3 (3.00%) high mild
+  5 (5.00%) high severe
+
+Benchmarking (k: 10, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 10, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 10, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.0278 s (200 iterations)
+Benchmarking (k: 10, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 10, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+                        time:   [24.347 ms 24.413 ms 24.483 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  4 (4.00%) high mild
+
+Benchmarking (k: 10 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 10 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 10 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 5.0342 s (800 iterations)
+Benchmarking (k: 10 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 10 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+                        time:   [6.3420 ms 6.3624 ms 6.3842 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high mild
+
+Benchmarking (k: 50, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 50, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 12.4s, or reduce sample count to 40.
+Benchmarking (k: 50, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 12.433 s (100 iterations)
+Benchmarking (k: 50, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 50, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+                        time:   [121.05 ms 121.29 ms 121.55 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 50 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 50 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 50 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.1751 s (200 iterations)
+Benchmarking (k: 50 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 50 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+                        time:   [30.883 ms 30.988 ms 31.126 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  6 (6.00%) high mild
+  5 (5.00%) high severe
+
+Benchmarking (k: 100, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 100, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 24.4s, or reduce sample count to 20.
+Benchmarking (k: 100, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 24.399 s (100 iterations)
+Benchmarking (k: 100, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 100, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+                        time:   [241.98 ms 242.65 ms 243.38 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  2 (2.00%) high mild
+
+Benchmarking (k: 100 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 100 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.1s, or reduce sample count to 80.
+Benchmarking (k: 100 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.1392 s (100 iterations)
+Benchmarking (k: 100 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 100 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+                        time:   [61.448 ms 61.640 ms 61.892 ms]
+Found 8 outliers among 100 measurements (8.00%)
+  1 (1.00%) low mild
+  3 (3.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 250, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 250, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 61.0s, or reduce sample count to 10.
+Benchmarking (k: 250, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 61.006 s (100 iterations)
+Benchmarking (k: 250, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 250, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+                        time:   [603.42 ms 604.12 ms 604.86 ms]
+Found 13 outliers among 100 measurements (13.00%)
+  1 (1.00%) low mild
+  12 (12.00%) high mild
+
+Benchmarking (k: 250 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 250 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 15.5s, or reduce sample count to 30.
+Benchmarking (k: 250 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 15.456 s (100 iterations)
+Benchmarking (k: 250 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 250 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+                        time:   [152.98 ms 153.10 ms 153.23 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 122.7s, or reduce sample count to 10.
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 122.66 s (100 iterations)
+Benchmarking (k: 500, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 500, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+                        time:   [1.2041 s 1.2049 s 1.2059 s]
+Found 8 outliers among 100 measurements (8.00%)
+  4 (4.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 500 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 500 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 30.6s, or reduce sample count to 10.
+Benchmarking (k: 500 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 30.573 s (100 iterations)
+Benchmarking (k: 500 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 500 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+                        time:   [306.92 ms 307.14 ms 307.38 ms]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 1000, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1000, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 242.0s, or reduce sample count to 10.
+Benchmarking (k: 1000, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 241.98 s (100 iterations)
+Benchmarking (k: 1000, n: 512, t: 255) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1000, n: 512, t: 255) | Common | Generate Encrypted Shares Batch
+                        time:   [2.4294 s 2.4564 s 2.4930 s]
+Found 12 outliers among 100 measurements (12.00%)
+  1 (1.00%) high mild
+  11 (11.00%) high severe
+
+Benchmarking (k: 1000 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1000 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 61.4s, or reduce sample count to 10.
+Benchmarking (k: 1000 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 61.380 s (100 iterations)
+Benchmarking (k: 1000 n: 512, t: 255) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1000 n: 512, t: 255) | Common | Reconstruct Secrets Exponent
+                        time:   [616.23 ms 618.15 ms 620.49 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  1 (1.00%) high mild
+  5 (5.00%) high severe
+
+Benchmarking (k: 1, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+Benchmarking (k: 1, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 5.3413 s (700 iterations)
+Benchmarking (k: 1, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+                        time:   [7.2998 ms 7.3174 ms 7.3357 ms]
+Found 1 outliers among 100 measurements (1.00%)
+  1 (1.00%) high mild
+
+Benchmarking (k: 1 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.7s, enable flat sampling, or reduce sample count to 60.
+Benchmarking (k: 1 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.7096 s (5050 iterations)
+Benchmarking (k: 1 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+                        time:   [1.3542 ms 1.3559 ms 1.3575 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  1 (1.00%) low severe
+  1 (1.00%) low mild
+  9 (9.00%) high mild
+
+Benchmarking (k: 10, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 10, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 7.1s, or reduce sample count to 70.
+Benchmarking (k: 10, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 7.0539 s (100 iterations)
+Benchmarking (k: 10, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 10, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+                        time:   [69.801 ms 69.919 ms 70.047 ms]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 10 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 10 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+Benchmarking (k: 10 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.2162 s (500 iterations)
+Benchmarking (k: 10 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 10 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+                        time:   [12.509 ms 12.547 ms 12.588 ms]
+Found 3 outliers among 100 measurements (3.00%)
+  3 (3.00%) high mild
+
+Benchmarking (k: 50, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 50, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 34.7s, or reduce sample count to 10.
+Benchmarking (k: 50, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 34.732 s (100 iterations)
+Benchmarking (k: 50, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 50, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+                        time:   [346.75 ms 348.24 ms 349.96 ms]
+Found 18 outliers among 100 measurements (18.00%)
+  10 (10.00%) high mild
+  8 (8.00%) high severe
+
+Benchmarking (k: 50 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 50 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.1s, or reduce sample count to 80.
+Benchmarking (k: 50 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 6.0935 s (100 iterations)
+Benchmarking (k: 50 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 50 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+                        time:   [61.763 ms 62.245 ms 62.785 ms]
+Found 15 outliers among 100 measurements (15.00%)
+  1 (1.00%) high mild
+  14 (14.00%) high severe
+
+Benchmarking (k: 100, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 100, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 69.5s, or reduce sample count to 10.
+Benchmarking (k: 100, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 69.530 s (100 iterations)
+Benchmarking (k: 100, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 100, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+                        time:   [706.46 ms 713.47 ms 721.03 ms]
+Found 12 outliers among 100 measurements (12.00%)
+  11 (11.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 100 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 100 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 14.0s, or reduce sample count to 30.
+Benchmarking (k: 100 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 14.016 s (100 iterations)
+Benchmarking (k: 100 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 100 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+                        time:   [123.29 ms 124.22 ms 125.35 ms]
+Found 11 outliers among 100 measurements (11.00%)
+  7 (7.00%) high mild
+  4 (4.00%) high severe
+
+Benchmarking (k: 250, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 250, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 178.9s, or reduce sample count to 10.
+Benchmarking (k: 250, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 178.90 s (100 iterations)
+Benchmarking (k: 250, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 250, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+                        time:   [1.7609 s 1.7736 s 1.7879 s]
+Found 10 outliers among 100 measurements (10.00%)
+  2 (2.00%) high mild
+  8 (8.00%) high severe
+
+Benchmarking (k: 250 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 250 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 31.3s, or reduce sample count to 10.
+Benchmarking (k: 250 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 31.311 s (100 iterations)
+Benchmarking (k: 250 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 250 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+                        time:   [312.60 ms 313.91 ms 315.34 ms]
+Found 6 outliers among 100 measurements (6.00%)
+  5 (5.00%) high mild
+  1 (1.00%) high severe
+
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 390.4s, or reduce sample count to 10.
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 390.42 s (100 iterations)
+Benchmarking (k: 500, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 500, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+                        time:   [3.4946 s 3.5080 s 3.5226 s]
+Found 13 outliers among 100 measurements (13.00%)
+  6 (6.00%) high mild
+  7 (7.00%) high severe
+
+Benchmarking (k: 500 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 500 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 61.6s, or reduce sample count to 10.
+Benchmarking (k: 500 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 61.633 s (100 iterations)
+Benchmarking (k: 500 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 500 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+                        time:   [623.82 ms 626.35 ms 629.18 ms]
+Found 9 outliers among 100 measurements (9.00%)
+  6 (6.00%) high mild
+  3 (3.00%) high severe
+
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 697.7s, or reduce sample count to 10.
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Collecting 100 samples in estimated 697.69 s (100 iterations)
+Benchmarking (k: 1000, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch: Analyzing
+(k: 1000, n: 1024, t: 511) | Common | Generate Encrypted Shares Batch
+                        time:   [7.1369 s 7.1996 s 7.2671 s]
+Found 13 outliers among 100 measurements (13.00%)
+  11 (11.00%) high mild
+  2 (2.00%) high severe
+
+Benchmarking (k: 1000 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+Benchmarking (k: 1000 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Warming up for 3.0000 s
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 126.9s, or reduce sample count to 10.
+Benchmarking (k: 1000 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Collecting 100 samples in estimated 126.92 s (100 iterations)
+Benchmarking (k: 1000 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent: Analyzing
+(k: 1000 n: 1024, t: 511) | Common | Reconstruct Secrets Exponent
+                        time:   [1.2597 s 1.2672 s 1.2756 s]
+Found 9 outliers among 100 measurements (9.00%)
+  7 (7.00%) high mild
+  2 (2.00%) high severe
+

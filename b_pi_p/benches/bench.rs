@@ -11,7 +11,8 @@ use common::{
 };
 
 fn pvss(c: &mut Criterion) {
-    for (n, t) in BENCH_N_T {
+    // for (n, t) in BENCH_N_T {
+    for (n, t) in [(512, 255), (1024, 511)] {
         let mut rng = rand::rng();
         let mut hasher = blake3::Hasher::new();
         let mut buf: [u8; 64] = [0u8; 64];
@@ -23,8 +24,8 @@ fn pvss(c: &mut Criterion) {
 
         let xpows = gen_powers(n, t);
 
-        for k in BENCH_K {
-            // for k in [1, 10, 50, 100, 250, 500, 1000] {
+        // for k in BENCH_K {
+        for k in [10000] {
             let g: Vec<RistrettoPoint> = random_points(&mut rng, k);
             let mut parties = generate_parties(&generator, &g, &g2, &g3, &mut rng, n, t);
 

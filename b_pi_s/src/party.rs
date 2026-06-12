@@ -1,6 +1,6 @@
 use blake3::Hasher;
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto, traits::Identity};
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 use zeroize::Zeroize;
 
 use common::{
@@ -16,6 +16,7 @@ use rayon::prelude::*;
 
 #[derive(Clone)]
 pub struct Party {
+    pub g: RistrettoPoint,
     pub private_key: Scalar,
     pub public_key: (CompressedRistretto, RistrettoPoint),
     pub index: usize,
@@ -28,10 +29,8 @@ pub struct Party {
     pub decrypted_share: Option<Vec<RistrettoPoint>>,
     pub encrypted_shares: Option<(Vec<Vec<CompressedRistretto>>, Vec<Vec<RistrettoPoint>>)>,
     pub decrypted_shares: Option<Vec<Vec<RistrettoPoint>>>,
-    pub share: Option<Vec<Scalar>>,
-    pub share_proof: Option<Vec<(Scalar, Scalar)>>,
-    pub share_proofs: Option<Vec<Vec<(Scalar, Scalar)>>>,
-    pub shares: Option<Vec<Vec<Scalar>>>,
+    pub share_proof: Option<(Scalar, Scalar)>,
+    pub share_proofs: Option<Vec<(Scalar, Scalar)>>,
     pub qualified_set: Option<Vec<(usize, Vec<RistrettoPoint>)>>,
 }
 
@@ -44,20 +43,20 @@ impl Party {
         index: usize,
     ) -> Result<Self, Error>
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let private_key = random_scalar(rng);
         let public_key = g * &private_key;
 
         if index <= n && t < n && t as f32 == ((n - 1) as f32 / 2.0).floor() {
             Ok(Self {
+                g: g.clone(),
                 private_key,
                 public_key: (public_key.compress(), public_key),
                 index,
                 n,
                 t,
                 dealer_proof: None,
-                share: None,
                 public_keys: None,
                 validated_shares: vec![],
                 encrypted_shares: None,
@@ -66,7 +65,6 @@ impl Party {
                 decrypted_share: None,
                 share_proof: None,
                 share_proofs: None,
-                shares: None,
                 qualified_set: None,
             })
         } else {
@@ -74,8 +72,13 @@ impl Party {
         }
     }
 
-    pub fn ingest_share(&mut self, share: &Vec<Scalar>) {
-        self.share = Some(share.clone());
+    pub fn ingest_encrypted_share(&mut self, share: &Vec<CompressedRistretto>) {
+        self.encrypted_share = Some(
+            share
+                .par_iter()
+                .map(|share_k| share_k.decompress().unwrap())
+                .collect(),
+        );
     }
 
     pub fn ingest_dealer_proof(&mut self, proof: (&Scalar, &Polynomial)) -> Result<(), Error> {
@@ -105,18 +108,18 @@ impl Party {
                     let z_evals = z.evaluate_range_precomp(x_pows, 1, public_keys.len());
 
                     let suite: Vec<CompressedRistretto> = z_evals
-                        .iter()
-                        .zip(public_keys.iter().zip(encrypted_shares.1.iter()))
+                        .par_iter()
+                        .zip(public_keys.par_iter().zip(encrypted_shares.1.par_iter()))
                         .map(|(z_eval, (public_key, encrypted_shares_i))| {
                             ((z_eval * public_key)
                                 - d_vals
-                                    .iter()
+                                    .par_iter()
                                     .zip(encrypted_shares_i)
                                     .map(|(d_val, encrypted_shares_i_k)| {
                                         encrypted_shares_i_k * d_val
                                     })
-                                    // .reduce(|| RistrettoPoint::identity(), |acc, x| acc + x))
-                                    .fold(RistrettoPoint::identity(), |acc, x| acc + x))
+                                    .reduce(|| RistrettoPoint::identity(), |acc, x| acc + x))
+                            // .fold(RistrettoPoint::identity(), |acc, x| acc + x))
                             .compress()
                         })
                         .collect();
@@ -172,35 +175,32 @@ impl Party {
         buf: &mut [u8; 64],
     ) -> Result<(), Error>
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         match (&self.decrypted_share, &self.encrypted_share) {
             (Some(decrypted_shares), Some(encrypted_shares)) => {
-                self.share_proof = Some(
-                    decrypted_shares
-                        .iter()
-                        .zip(encrypted_shares)
-                        .map(|(decrypted_share, encrypted_share)| {
-                            let r = common::random::random_scalar(rng);
-                            let c1 = (g * &r).compress();
-                            let c2 = (decrypted_share * r).compress();
+                let r = random_scalar(rng);
+                // g^si
+                hasher.update(self.public_key.0.as_bytes());
+                // g^r
+                hasher.update((g * &r).compress().as_bytes());
 
-                            hasher.update(self.public_key.0.as_bytes());
-                            hasher.update(encrypted_share.compress().as_bytes());
-                            hasher.update(c1.as_bytes());
-                            hasher.update(c2.as_bytes());
-
-                            hasher.finalize_xof().fill(buf);
-
-                            let d = Scalar::from_bytes_mod_order_wide(buf);
-                            let z = r + d * self.private_key;
-                            hasher.reset();
-                            buf.zeroize();
-
-                            (d, z)
-                        })
-                        .collect(),
+                decrypted_shares.iter().zip(encrypted_shares).for_each(
+                    |(decrypted_share, encrypted_share)| {
+                        // g^(si * fi)
+                        hasher.update(encrypted_share.compress().as_bytes());
+                        // g^(fi * r)
+                        hasher.update((decrypted_share * r).compress().as_bytes());
+                    },
                 );
+
+                hasher.finalize_xof().fill(buf);
+
+                let d = Scalar::from_bytes_mod_order_wide(buf);
+                let z = r + d * self.private_key;
+                hasher.reset();
+                buf.zeroize();
+                self.share_proof = Some((d, z));
 
                 Ok(())
             }
@@ -239,7 +239,7 @@ impl Party {
     pub fn ingest_decrypted_shares_and_proofs(
         &mut self,
         decrypted_shares: &Vec<Vec<CompressedRistretto>>,
-        proofs: Vec<Vec<(Scalar, Scalar)>>,
+        proofs: Vec<(Scalar, Scalar)>,
     ) -> Result<(), Error> {
         if decrypted_shares.len() == self.n - 1 {
             if proofs.len() == decrypted_shares.len() {
@@ -275,7 +275,7 @@ impl Party {
         }
     }
 
-    pub fn verify_decrypted_shares(&mut self, g: &RistrettoPoint) -> Result<bool, Error> {
+    pub fn verify_decrypted_shares(&mut self) -> Result<bool, Error> {
         match (&self.public_keys, &self.encrypted_shares) {
             (Some(public_keys), Some(enc_shares)) => {
                 match (&self.decrypted_shares, &self.share_proofs) {
@@ -288,36 +288,23 @@ impl Party {
                                     .zip(public_keys.par_iter().zip(enc_shares.1.par_iter())),
                             )
                             .enumerate()
-                            .map(|(i, (dec_share, (proof, (public_key, enc_share))))| {
-                                if dec_share
-                                    .par_iter()
-                                    .zip(proof.par_iter().zip(enc_share.par_iter()))
-                                    .map_init(
-                                        || (blake3::Hasher::new(), [0u8; 64]),
-                                        |(hasher, buf), (dec_share_k, ((d, z), enc_share_k))| {
-                                            let num1 = g * z;
-                                            let num2 = dec_share_k * z;
+                            .map_init(|| (blake3::Hasher::new(), [0u8; 64]),
+                        |(hasher, buf),(i, (dec_share, ((d, z), (public_key, enc_share))))| {
+                            hasher.update(public_key.compress().as_bytes());
 
-                                            let denom1 = public_key * d;
-                                            let denom2 = enc_share_k * d;
+                            hasher.update(((self.g * z) -(public_key*d)).compress().as_bytes());
+dec_share.iter().zip(enc_share).for_each(|(dec_share_k, enc_share_k)| {
+                                    hasher.update(enc_share_k.compress().as_bytes());
+                                    hasher.update(((dec_share_k * z)-(enc_share_k *d)).compress().as_bytes());
+                                });
 
-                                            hasher.update(public_key.compress().as_bytes());
-                                            hasher.update(enc_share_k.compress().as_bytes());
-                                            hasher.update((num1 - denom1).compress().as_bytes());
-                                            hasher.update((num2 - denom2).compress().as_bytes());
-                                            hasher.finalize_xof().fill(buf);
+                                hasher.finalize_xof().fill(buf);
 
-                                            let reconstructed_d =
-                                                Scalar::from_bytes_mod_order_wide(buf);
+                                hasher.reset();
+                                    let reconstructed_d = Scalar::from_bytes_mod_order_wide(buf);
 
-                                            hasher.reset();
-                                            buf.zeroize();
-
-                                            *d == reconstructed_d
-                                        },
-                                    )
-                                    .reduce(|| true, |acc, res| acc && res)
-                                {
+                                    buf.zeroize();
+                               if reconstructed_d == *d {
                                     Some(i)
                                 } else {
                                     None
@@ -344,7 +331,7 @@ impl Party {
 
 pub fn generate_parties<R>(g: &RistrettoPoint, rng: &mut R, n: usize, t: usize) -> Vec<Party>
 where
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     (1..=n)
         .map(|i| Party::new(g, rng, n, t, i).unwrap())

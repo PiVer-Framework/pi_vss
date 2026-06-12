@@ -17,9 +17,9 @@ mod tests {
 
     #[test]
     fn end_to_end() {
-        const N: usize = 16;
-        const T: usize = 7;
-        const K: usize = 3;
+        const N: usize = 1024;
+        const T: usize = 511;
+        const K: usize = 16;
 
         let mut rng = rand::rng();
 

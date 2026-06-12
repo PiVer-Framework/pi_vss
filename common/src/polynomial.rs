@@ -1,6 +1,6 @@
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto};
 
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 use rayon::prelude::*;
 
 use crate::{
@@ -44,14 +44,14 @@ impl Polynomial {
     }
     pub fn sample<R>(degree: usize, rng: &mut R) -> Self
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         Polynomial::from_coefficients(random_scalars(rng, degree + 1))
     }
 
     pub fn sample_set_f0<R>(degree: usize, rng: &mut R, f0: &Scalar) -> Self
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let mut coefs: Vec<Scalar> = (0..=degree).map(|_| random_scalar(rng)).collect();
         coefs[0] = *f0;
@@ -63,7 +63,7 @@ impl Polynomial {
 
     pub fn sample_two<R>(degree: usize, rng: &mut R) -> (Self, Self)
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let (coefs_1, coefs_2) = (0..=degree)
             .map(|_| (random_scalar(rng), random_scalar(rng)))
@@ -106,7 +106,7 @@ impl Polynomial {
 
     pub fn sample_two_set_f0<R>(degree: usize, f0: &Scalar, rng: &mut R) -> (Self, Self)
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let (mut coefs_1, coefs_2): (Vec<Scalar>, Vec<Scalar>) = (0..=degree)
             .map(|_| (random_scalar(rng), random_scalar(rng)))

@@ -13,7 +13,6 @@ error_chain! {
         InsufficientShares(count: usize, t: usize){
             description("The number of validated shares is less than the required threshold.")
             display("The number of validated shares is {count}. This is less than the required t+1 shares (t+1 = {}).", t+1)
-
         }
         UninitializedValue(t: &'static str) {
             description("Attempted to operate on an unititalized value")

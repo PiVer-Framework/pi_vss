@@ -11,7 +11,8 @@ use common::{
 };
 
 fn VSS(c: &mut Criterion) {
-    for (n, t) in BENCH_N_T {
+    for (n, t) in [] {
+        // for (n, t) in BENCH_N_T {
         let mut rng = rand::rng();
         let mut hasher = blake3::Hasher::new();
         let mut buf: [u8; 64] = [0u8; 64];

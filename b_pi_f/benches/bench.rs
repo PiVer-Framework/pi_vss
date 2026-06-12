@@ -21,7 +21,8 @@ fn pvss(c: &mut Criterion) {
 
         let xpows = gen_powers(n, t);
 
-        for k in BENCH_K {
+        // for k in BENCH_K {
+        for k in [10000] {
             let g: Vec<RistrettoPoint> = random_points(&mut rng, k);
             let mut parties = generate_parties(&generator, &g, &g0, &mut rng, n, t);
 
@@ -91,7 +92,10 @@ fn pvss(c: &mut Criterion) {
             );
 
             c.bench_function(
-                &format!("(n: {}, t: {}) | Pi_P PVSS | Party: Verify Shares", n, t),
+                &format!(
+                    "(n: {}, t: {}, k: {}) | B_Pi_F VSS | Party: Verify Shares",
+                    n, t, k
+                ),
                 |b| {
                     b.iter_batched(
                         || (blake3::Hasher::new(), [0u8; 64]),

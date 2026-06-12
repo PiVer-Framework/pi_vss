@@ -1,6 +1,6 @@
 use blake3::Hasher;
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto};
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 use zeroize::Zeroize;
 
 use common::{
@@ -38,7 +38,7 @@ impl Party {
         index: usize,
     ) -> Result<Self, Error>
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let private_key = random_scalar(rng);
         let public_key = g * &private_key;
@@ -177,7 +177,7 @@ impl Party {
 
 pub fn generate_parties<R>(g: &RistrettoPoint, rng: &mut R, n: usize, t: usize) -> Vec<Party>
 where
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     (1..=n)
         .map(|i| Party::new(g, rng, n, t, i).unwrap())

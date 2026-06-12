@@ -1,5 +1,5 @@
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto};
-use rand::{CryptoRng, RngCore, seq::SliceRandom};
+use rand::{CryptoRng, Rng, seq::SliceRandom};
 
 use crate::{
     error::{
@@ -92,7 +92,7 @@ pub fn select_qualified_set<R, T>(
 ) -> Result<Vec<(usize, T)>, Error>
 where
     T: Clone,
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     match shares {
         Some(shares) => {

@@ -5,7 +5,7 @@ use zeroize::Zeroize;
 
 pub fn random_scalar<R>(rng: &mut R) -> Scalar
 where
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     let mut bytes = [0u8; 64];
     rng.fill_bytes(&mut bytes);
@@ -16,7 +16,7 @@ where
 
 pub fn random_scalars<R>(rng: &mut R, n: usize) -> Vec<Scalar>
 where
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     let mut bytes = [0u8; 64];
     (0..n)
@@ -31,7 +31,7 @@ where
 
 pub fn random_point<R>(rng: &mut R) -> RistrettoPoint
 where
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     let mut bytes = [0u8; 64];
     rng.fill_bytes(&mut bytes);
@@ -42,7 +42,7 @@ where
 
 pub fn random_points<R>(rng: &mut R, n: usize) -> Vec<RistrettoPoint>
 where
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     let mut bytes = [0u8; 64];
     (0..n)

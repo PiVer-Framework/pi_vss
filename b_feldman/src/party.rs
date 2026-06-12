@@ -1,5 +1,5 @@
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto, traits::Identity};
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 
 use common::{
     error::{
@@ -10,6 +10,7 @@ use common::{
         },
     },
     random::random_scalar,
+    utils::mod_pow,
 };
 use rayon::prelude::*;
 
@@ -40,7 +41,7 @@ impl Party {
         index: usize,
     ) -> Result<Self, Error>
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         let private_key = random_scalar(rng);
         let public_key = generator * &private_key;
@@ -96,17 +97,18 @@ impl Party {
         match &self.dealer_proof {
             Some((_, cvals)) => match &self.share {
                 Some(fi) => {
-                    let a = fi
+                    let a: RistrettoPoint = fi
                         .par_iter()
                         .zip(self.g.par_iter())
                         .map(|(fik, gk)| fik * gk)
-                        .reduce(|| RistrettoPoint::identity(), |acc, prod| acc + prod);
+                        .sum();
 
-                    let b = cvals
+                    let b: RistrettoPoint = cvals
                         .par_iter()
                         .enumerate()
-                        .map(|(t, c)| c * Scalar::from(self.index.pow(t as u32) as u64))
-                        .reduce(|| RistrettoPoint::identity(), |acc, prod| acc + prod);
+                        // .map(|(t, c)| c * Scalar::from(self.index.pow(t as u32) as u64))
+                        .map(|(t, c)| c * mod_pow(self.index, t))
+                        .sum();
 
                     Ok(a == b)
                 }
@@ -133,7 +135,8 @@ impl Party {
                             let b = cvals
                                 .par_iter()
                                 .enumerate()
-                                .map(|(t, c)| c * Scalar::from((i + 1).pow(t as u32) as u64))
+                                // .map(|(t, c)| c * Scalar::from((i + 1).pow(t as u32) as u64))
+                                .map(|(t, c)| c * mod_pow(i + 1, t))
                                 .reduce(|| RistrettoPoint::identity(), |acc, prod| acc + prod);
 
                             if a == b { Some(i) } else { None }
@@ -167,7 +170,7 @@ pub fn generate_parties<R>(
     t: usize,
 ) -> Vec<Party>
 where
-    R: CryptoRng + RngCore,
+    R: CryptoRng + Rng,
 {
     (1..=n)
         .map(|i| Party::new(generator, g.clone(), rng, n, t, i).unwrap())

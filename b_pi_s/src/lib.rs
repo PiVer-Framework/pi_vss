@@ -69,7 +69,7 @@ mod tests {
 
         let (decrypted_shares, share_proofs): (
             Vec<Vec<CompressedRistretto>>,
-            Vec<Vec<(Scalar, Scalar)>>,
+            Vec<(Scalar, Scalar)>,
         ) = parties
             .iter_mut()
             .map(|p| {
@@ -97,7 +97,7 @@ mod tests {
             p.ingest_decrypted_shares_and_proofs(&decrypted_shares, share_proofs)
                 .unwrap();
 
-            assert!(p.verify_decrypted_shares(&g).unwrap());
+            assert!(p.verify_decrypted_shares().unwrap());
 
             p.qualified_set = Some(
                 select_qualified_set(&mut rng, p.t, &p.decrypted_shares, &p.validated_shares)

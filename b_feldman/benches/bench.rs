@@ -17,7 +17,7 @@ fn vss(c: &mut Criterion) {
         let generator: RistrettoPoint = random_point(&mut rng);
 
         let xpows = gen_powers(n, t);
-        for k in BENCH_K {
+        for k in 1..=16 {
             let g: Vec<RistrettoPoint> = random_points(&mut rng, k);
             let mut parties = generate_parties(&generator, &g, &mut rng, n, t);
 
@@ -44,8 +44,8 @@ fn vss(c: &mut Criterion) {
 
             c.bench_function(
                 &format!(
-                    "(n: {}, t: {}) | B_Feldman VSS | Dealer: Generate Proof",
-                    n, t
+                    "(k: {}, n: {}, t: {}) | B_Feldman VSS | Dealer: Generate Proof",
+                    k, n, t
                 ),
                 |b| {
                     b.iter_batched(
@@ -61,21 +61,15 @@ fn vss(c: &mut Criterion) {
             let p = &mut parties[0];
             p.ingest_dealer_proof(&c_vals).unwrap();
 
-            p.ingest_share(&shares[p.index - 1]);
-            assert!(
-                p.verify_share().unwrap(),
-                "individual share verification failure"
-            );
-
             p.ingest_shares(&shares).unwrap();
 
             c.bench_function(
                 &format!(
-                    "(n: {}, t: {}) | B_Feldman VSS | Party: Verify Shares",
-                    n, t
+                    "(k: {}, n: {}, t: {}) | B_Feldman VSS | Party: Verify Shares",
+                    k, n, t
                 ),
                 |b| {
-                    b.iter_with_large_drop(|| {
+                    b.iter(|| {
                         assert!(p.verify_shares().unwrap());
                     })
                 },

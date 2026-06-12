@@ -12,6 +12,7 @@ use common::{
 
 fn pvss(c: &mut Criterion) {
     for (n, t) in BENCH_N_T {
+        // for (n, t) in [(256, 127)] {
         let mut rng = rand::rng();
         let mut hasher = blake3::Hasher::new();
         let mut buf: [u8; 64] = [0u8; 64];
@@ -42,7 +43,7 @@ fn pvss(c: &mut Criterion) {
         }
 
         // for k in BENCH_K {
-        for k in [1, 10, 50, 100, 250, 500, 1000] {
+        for k in [10000] {
             let secrets = random_scalars(&mut rng, k);
 
             let (f_polynomials, f_evals) = generate_shares_batched(n, t, &xpows, &secrets);

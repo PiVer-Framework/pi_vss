@@ -4,7 +4,7 @@ use common::{
     secret_sharing::generate_shares_batched,
     utils::{batch_decompress_ristretto_points, compute_d_powers_from_hash_commitments},
 };
-use rand::{CryptoRng, RngCore};
+use rand::{CryptoRng, Rng};
 
 use blake3::Hasher;
 use curve25519_dalek::{RistrettoPoint, Scalar, ristretto::CompressedRistretto};
@@ -52,7 +52,7 @@ impl Dealer {
         secrets: &Vec<Scalar>,
     ) -> (Vec<Vec<Scalar>>, (Vec<[u8; 64]>, Polynomial))
     where
-        R: CryptoRng + RngCore,
+        R: CryptoRng + Rng,
     {
         // number of secrets to share
         let k = secrets.len();
